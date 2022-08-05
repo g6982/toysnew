@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_session_form_toys" model="ir.ui.view">
+        <field name="model">pos.session</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@id='validate_closing_control']" position="after">
+                <button name="print_report_close_cash" type="object" string="Imprimir cierre Caja"
+                        attrs="{'invisible' : [('state', '!=', 'closed')]}" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="toys_template" inherit_id="point_of_sale.template" xml:space="preserve">
+	<!-- ClientListScreenWidget -->
+
+    <t t-name="PaymentScreenInherit" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
+            <xpath expr="//div[hasclass('top-content-center')]" position="replace">
+    			  <t t-if="!env.isMobile">
+                      <t t-if="show_envio_hacienda">
+                          	<div class="top-content-center" style="text-align: -webkit-center;">
+                                <h1>
+                                    <span style="width: 50%;"/>
+                                    <span style="width: 50%;">
+                                        <label class="content-customized" style="width: 25%;color: lightseagreen;">Enviar a Hacienda
+                                          <input type="checkbox" id="check_sent_hacienda" t-on-click="trigger('envio-hacienda')"/>
+                                            <span class="checkmark" style="background: #255688;"/>
+                                        </label>
+                                    </span>
+                                </h1>
+                            </div>
+                      </t>
+                      <t t-else="">
+                            <div class="top-content-center"><h1 style="color: lightseagreen;">Proceso de Pago</h1></div>
+                      </t>
+
+    			  </t>
+    		</xpath>
+    	</t>
+</templates>

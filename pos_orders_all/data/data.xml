@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="pos_bag_category_1" model="pos.category">
+            <field name="name">POS Bag</field>
+        </record>
+    </data>
+    <!--Todo: Creando nuevo método de pago para devoluciones-->
+    <data noupdate="1">
+        <record id="PaymentMethods_refund" model="payment.methods">
+            <field name="sequence">9999</field>
+            <field name="name">Devolución</field>
+            <field name="active">true</field>
+        </record>
+        <record id="pos_payment_method_refund" model="pos.payment.method">
+            <field name="name">Devolución</field>
+            <field name="active">true</field>
+            <field name="is_refund">true</field>
+        </record>
+    </data>
+</odoo>

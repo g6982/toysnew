@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_location_form_inherit" model="ir.ui.view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='additional_info']" position="inside">
+                <field name="is_out"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_location_route_form_toys_view" model="ir.ui.view">
+        <field name="model">stock.location.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <field name="product_template_ids" invisible="1"/>
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_products"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('product_template_count', '=', 0)]}">
+                        <field name="product_template_count" widget="statinfo" string="Productos"/>
+                    </button>
+                </div>
+            </xpath>
+             <xpath expr="//sheet" position="before">
+                 <header>
+                       <button name="to_assign_all_products" type="object"
+                            string="Asignar a productos" class="oe_highlight"/>
+                 </header>
+             </xpath>
+        </field>
+    </record>
+</odoo>
+

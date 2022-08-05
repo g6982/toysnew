@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_order_toys_form" model="ir.ui.view">
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+<!--&lt;!&ndash;            <xpath expr="//field[@name='fiscal_position_id']" position="after">&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="coupon_program_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </xpath>&ndash;&gt;-->
+<!--             <xpath expr="//group[@name='order_total']" position="before">-->
+<!--                <div class="oe_right">-->
+<!--                    <button name="%(l10n_cr_toy_extends.pos_coupon_apply_code_action)d" class="btn btn-secondary"-->
+<!--                            string="Coupon" type="action" groups="base.group_user" states="draft,done"/>-->
+<!--                    <button name="recompute_coupon_lines" class="btn btn-secondary" string="Promotions"-->
+<!--                            help="When clicked, the content of the order will be checked to detect (and apply) possible promotion programs."-->
+<!--                            type="object" states="draft,done"/>-->
+<!--                </div>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='payment_ids']//tree//field[@name='payment_method_id']" position="after">
+                <field name="transaction_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

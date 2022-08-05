@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_account_pos_form" model="ir.ui.view">
+        <field name="name">account.account.pos.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+
+                <div class="row" id="div_special_cash_pos">
+                    <hr/>
+                    <div class="col-12 text-center">
+                        <span style="font-size: 17px;color: #37c556"><strong></strong>Especialmente para efectivo en POS :
+                        </span>
+                        <field name="special_cash_pos" widget="boolean_toggle"/>
+                    </div>
+                    <div class="col-12 text-center" >
+                        <div class="alert alert-info" role="alert" style="margin-bottom:0px;">
+                            <div>Usted podrá :Usar cuenta para ingreso y retiro de dinero en POS.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

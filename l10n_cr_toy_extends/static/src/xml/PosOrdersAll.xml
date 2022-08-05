@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" inherit_id="point_of_sale.template" xml:space="preserve">
+
+<!--    <t t-name="SeePOSOrdersButton" owl="1">-->
+    <!--		<span class="control-button see_pos_orders odoo-theme-color">-->
+    <!--			<i class="fa fa-university"></i>-->
+    <!--			<span>Orders</span>-->
+    <!--		</span>-->
+    <!--	</t>-->
+
+    <t t-name="OrdersScreenWidget" t-inherit="pos_orders.OrdersScreenWidget" t-inherit-mode="extension" owl="1">
+        <xpath expr="//table[hasclass('client-list')]//thead//tr//th[5]" position="after">
+            <th>Ver Detalle</th>
+            <th>Re-Imprimir</th>
+        </xpath>
+    </t>
+
+    <t t-extend='WkOrderLine'>
+          <t t-jquery='.wk-order-line' t-operation="attributes">
+              <attribute name="style"></attribute>
+          </t>
+        <t t-jquery='.wk-order-line' t-operation='append'>
+            <td class="view-order" t-att-data-id='order.id' t-on-click="trigger('click-detail',order)">
+                <button class="odoo-theme-button" ><i class="fa fa-print" />Ver</button>
+            </td>
+           <td class="print-order" t-att-data-id='order.id' t-on-click="trigger('click-reprint',order)">
+                <button class="odoo-theme-button" ><i class="fa fa-print" />Print</button>
+            </td>
+        </t>
+    </t>
+
+</templates>

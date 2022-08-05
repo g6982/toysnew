@@ -1,0 +1,47 @@
+.store_pickup_loder {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(/website_store_pickup/static/src/img/odoo-pickup-loader_loader.GIF) center no-repeat rgba(255, 255, 255, 0.5);
+    text-shadow: 0 1px 1px white;
+}
+
+.store-map {
+    border: 1px solid #CCCCCC;
+    padding: 0px;
+    margin-bottom: 25px;
+    /* width: 1139px; */
+}
+
+.map-header {
+    margin-top: 25px;
+    font-size: 16px;
+    padding: 8px;
+    background-color: #F9F9F9;
+    border: 1px solid #CCCCCC;
+    border-bottom: none;
+    /* width: 1139px; */
+    min-height: 112px;
+}
+
+.selected-symbole {
+    padding: 4px;
+    border-radius: 50%;
+    background-color: green;
+    height: 29px;
+    width: 29px;
+    padding-left: 7px;
+    position: relative;
+    top: -49px;
+    left: 88%;
+    z-index: 100;
+    color: #fff;
+}
+
+.checkout-disabled {
+    pointer-events: none;
+    cursor: default;
+}

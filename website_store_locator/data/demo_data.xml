@@ -1,0 +1,72 @@
+<odoo>
+
+
+    <data noupdate="1">
+        <record model="sale.shop" id="sale_shop1">
+            <field name="name">Webkul Software Pvt Ltd</field>
+            <field name="street">Webkul Software A-67 Sector 63</field>
+            <field name="city">Noida</field>
+            <field model="res.country.state" name="store_state" search="[('code','=','UP')]"/>
+            <field name="zipcode">201301</field>
+            <field name="country" ref="base.in"/>
+            <field name="store_web">www.webkul.com</field>
+            <field name="store_image" type="base64" file="website_store_locator/static/src/img/store1.jpeg"/>
+            <field name="store_active">True</field>
+            <field name="store_lat">28.6196388</field>
+            <field name="store_long">77.3785116</field>
+            <field name="coordinates_calc">manual</field>
+        </record>
+
+        <record model="sale.shop" id="sale_shop2">
+            <field name="name">Store 1</field>
+            <field name="street">Near Taj Mahal</field>
+            <field name="city">Agra</field>
+            <field model="res.country.state" name="store_state" search="[('code','=','UP')]"/>
+            <field name="zipcode">280111</field>
+            <field name="country" ref="base.in"/>
+            <field name="store_active">True</field>
+            <field name="store_lat">27.1750151</field>
+            <field name="store_long">78.0421552</field>
+            <field name="coordinates_calc">manual</field>
+        </record>
+        <record model="sale.shop" id="sale_shop3">
+            <field name="name">Store 2</field>
+            <field name="street">Near Red Fort</field>
+            <field name="city">Agra</field>
+            <field model="res.country.state" name="store_state" search="[('code','=','UP')]"/>
+            <field name="zipcode">280111</field>
+            <field name="country" ref="base.in"/>
+            <field name="store_lat">27.1795328</field>
+            <field name="store_long">78.021112</field>
+            <field name="coordinates_calc">by_addr</field>
+        </record>
+        <record model="sale.shop" id="sale_shop4">
+            <field name="name">Store 4</field>
+            <field name="street"></field>
+            <field name="city">Kerela</field>
+            <field model="res.country.state" name="store_state" search="[('code','=','TN')]"/>
+            <field name="zipcode">Webkul Software Pvt Ltd</field>
+            <field name="country" ref="base.in"/>
+            <field name="store_web">450021</field>
+            <field name="store_active">True</field>
+            <field name="store_lat">10.1399106	</field>
+            <field name="store_long">77.2732814</field>
+            <field name="coordinates_calc">manual</field>
+        </record>
+        <record model="sale.shop" id="sale_shop5">
+            <field name="name">Store 5</field>
+            <field name="street">Near Film City</field>
+            <field name="city">Mumbai</field>
+            <field model="res.country.state" name="store_state" search="[('code','=','MH')]"/>
+            <field name="zipcode">400001</field>
+            <field name="country" ref="base.in"/>
+            <field name="store_lat">19.1637168</field>
+            <field name="store_long">72.8836682</field>
+            <field name="coordinates_calc">manual</field>
+        </record>
+
+
+        
+    </data>
+    
+</odoo>

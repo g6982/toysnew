@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_multi_warehouse" inherit_id="point_of_sale.template" xml:space="preserve">
+
+
+	<t t-name="PosStockWarehouse" owl="1">
+		<div role="dialog" class="modal-dialog">
+			<Draggable>
+				<div class="popup" style="min-width: 50%;">
+					<header class="title drag-handle">
+						Related Warehouses
+					</header>
+					<main class="body" style="font-family: 'Lato-Reg';">
+						<div>
+							<div class='div-container'>
+								<span class='product warehouse-locations' t-foreach="result || []" t-as="item"  t-key="item['location'].id">	
+									<div class="product-name1" t-att-data-id="item['location'].id">
+										<strong><t t-esc="item['location'].complete_name"/></strong>
+										<t t-if="env.pos.config.display_stock_pos">
+											<span class='price-tag'><strong>Qty: <t t-esc="item['quantity']"/></strong></span>
+										</t>
+									</div>
+								</span>
+							</div>
+							<p class="warehouse-qty" style="display:none">
+								<label style="padding: 2%;"> Quantity to Use:  </label> <input id ="stock_qty" type="text" class="input-field" name="stock_qty" style="height: 10px; width: 40%;"></input>
+							</p>
+						</div>
+					</main>
+					<footer class="footer">
+						<div class="button cancel" t-on-click="cancel">
+							<t t-esc="props.cancelText" />
+						</div>
+						<div class="button apply" t-on-click="apply">
+							<t t-esc="props.confirmText" />
+						</div>
+					</footer>
+				</div>
+			</Draggable>
+		</div>
+	</t>
+	
+</templates>

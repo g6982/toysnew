@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <menuitem id="menu_warehouse_imports" name="Importar" sequence="10" parent="stock.menu_stock_root"/>
+        <menuitem id="menu_warehouse_imports_rules" name="Reglas de abastecimiento" parent="menu_warehouse_imports"  sequence="10"
+                  action="action_orderpoint_rules_import_wizard"/>
+        <menuitem id="menu_warehouse_imports_reposition" name="Reposiciones" parent="menu_warehouse_imports"  sequence="20"
+                  action="action_replacement_import_wizard"/>
+        <menuitem id="menu_warehouse_imports_internal_transfers" name="Transferencias internas" parent="menu_warehouse_imports"  sequence="30"
+                  action="action_internal_transfer_import_wizard"/>
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+    <record id="view_pos_config_form_inherit_cash_control" model="ir.ui.view">
+        <field name="name">POS configuration</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='iface_tipproduct']" position="before">
+                <div class="col-12 col-lg-6 o_setting_box" id="pos-cash-control-feature"
+                     attrs="{'invisible' : [('cash_control', '=', False)]}">
+                    <div class="o_setting_left_pane">
+                        <field name="enable_pos_cash_control"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="enable_pos_cash_control"/>
+                        <div class="text-muted">
+                            Mostrar función de control de efectivo en POS.
+                        </div>
+                         <hr/>
+                        <div class="text-muted">
+                              <i class="fa fa-info-circle text-info"/><strong> Ahora defina la cuenta de ingreso y retiro de efectivo en POS : </strong>
+                        </div>
+
+                        <div attrs="{'invisible': [('cash_control', '=', False)]}">
+                            <label for="account_cash_in" string="Cuenta ingreso"
+                                   class="font-weight-normal"/>
+                            <field name="account_cash_in" widget="many2many_tags"/>
+                        </div>
+                        <div attrs="{'invisible': [('cash_control', '=', False)]}">
+                            <label for="account_cash_out" string="Cuenta retiro"
+                                   class="font-weight-normal"/>
+                            <field name="account_cash_out" class="ml-3" widget="many2many_tags"/>
+                        </div>
+                    </div>
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+
+    <!--    <record id="view_pos_config_form_inherit_cash_control" model="ir.ui.view">-->
+    <!--        <field name="name">POS configuration</field>-->
+    <!--        <field name="model">pos.config</field>-->
+    <!--        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//div[@class='row mt16 o_settings_container'][7]" position="inside">-->
+    <!--                <div class="col-12 col-lg-6 o_setting_box" id="pos-cash-control-feature" attrs="{'invisible' : [('cash_control', '=', False)]}">-->
+    <!--                    <div class="o_setting_left_pane">-->
+    <!--                        <field name="enable_pos_cash_control"/>-->
+    <!--                    </div>-->
+    <!--                    <div class="o_setting_right_pane">-->
+    <!--                        <label for="enable_pos_cash_control"/>-->
+    <!--                        <div class="text-muted">-->
+    <!--                            Show Cash Control Feature in POS-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+</odoo>

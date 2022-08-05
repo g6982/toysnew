@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!--    <record id="merge_picking_toys_23" model="ir.ui.view">-->
+    <!--        <field name="model">merge.picking</field>-->
+    <!--        <field name="inherit_id" ref="gt_merge_picking.merge_picking_23"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='merge_picking_line']" position="before">-->
+
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='merge_picking_line']" position="attributes">-->
+    <!--                <attribute name="invisible">1</attribute>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='merge_picking_line']" position="after">-->
+
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <record id="picking_merge_form_wizard" model="ir.ui.view">
+        <field name="name">picking.merge.form</field>
+        <field name="model">picking.merge.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="new_type" string="Tipo unión"/>
+                        <field name="new_type_lines" string="Detalle de unión"/>
+                    </group>
+                    <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','exist_1'),('new_type','!=','new'),('new_type_lines','!=','e')]}">
+                        <strong>Si la transferencia pertence a una orden de venta o compra se evalúa: Mismo cliente/proveedor, lista de precios, usuario.</strong>
+                        <br/>
+                        <strong>Si la transferencia es de tipo interna, entonces, se evalua o agrupa por tipo de operación, ubicación origen, ubicación destino, rama y estado.</strong>
+                        <br/>
+                        Se creará una nueva transferencia y se cancelarán las transferencias relacionadas, además, las líneas o detalle de las transferencias, son iguales en cuanto
+                        en producto, precio y descuento (si están relacionadas a una orden), de lo contrario solo se evalua el producto.
+                    </div>
+                    <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','exist_1'),('new_type','!=','new'),('new_type_lines','!=','d')]}">
+                        <strong>Si la transferencia pertence a una orden de venta o compra se evalúa: Mismo cliente/proveedor, lista de precios, usuario.</strong>
+                        <br/>
+                        <strong>Si la transferencia es de tipo interna, entonces, se evalua o agrupa por tipo de operación, ubicación origen, ubicación destino, rama y estado.</strong>
+                        <br/>
+                        Se creará una nueva transferencia y se cancelarán las transferencias relacionadas, además, las líneas o detalle de las trasnferencias no son
+                        estrictamente iguales, por ende, se fusionarán todas las líneas involucradas.
+                    </div>
+                    <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','new'),('new_type','!=','exist_1'),('new_type_lines','!=','e')]}">
+                        <strong>Si la transferencia pertence a una orden de venta o compra se evalúa: Mismo cliente/proveedor, lista de precios, usuario.</strong>
+                        <br/>
+                        <strong>Si la transferencia es de tipo interna, entonces, se evalua o agrupa por tipo de operación, ubicación origen, ubicación destino, rama y estado.</strong>
+                        <br/>
+                        Se usará la primera transferencia como base para la unión y se cancelarán las transferencias relacionadas, además, las líneas o detalle de las transferencias
+                        son iguales en cuanto en producto, precio y descuento (si están relacionadas a una orden), de lo contrario solo se evalua el producto.
+                    </div>
+                    <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','new'),('new_type','!=','exist_1'),('new_type_lines','!=','d')]}">
+                        <strong>Si la transferencia pertence a una orden de venta o compra se evalúa: Mismo cliente/proveedor, lista de precios, usuario.</strong>
+                        <br/>
+                        <strong>Si la transferencia es de tipo interna, entonces, se evalua o agrupa por tipo de operación, ubicación origen, ubicación destino, rama y estado.</strong>
+                        <br/>
+                        Se usará la primera transferencia como base para la unión y se cancelarán las transferencias relacionadas, además, las líneas o detalle de las transferencias
+                        son iguales en cuanto en producto, precio y descuento (si están relacionadas a una orden), de lo contrario solo se evalua el producto.
+                    </div>
+                    <notebook>
+                        <page name="lines_so" string="Picking's agrupados">
+                            <field name="lines">
+                                <tree create="false">
+                                    <field name="count"/>
+                                    <field name="picking_type_id"/>
+                                    <field name="state"/>
+                                    <field name="picking_ids" widget="many2many_tags"/>
+                                    <field name="process" widget="badge" decoration-success="process == 'to_process'" decoration-danger="process == 'no_process'"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <footer>
+                            <button string="Unir Pickings" name="merge_picking" type="object" class="oe_highlight"/>
+                            <button string="Cancelar" class="oe_link" special="cancel"/>
+                        </footer>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_merge_picking" model="ir.actions.act_window">
+        <field name="name">Unión picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">picking.merge.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+
+</odoo>

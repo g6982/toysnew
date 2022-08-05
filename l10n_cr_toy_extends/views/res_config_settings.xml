@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='no_edit_order']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="div_confirmation_seller">
+                    <div class="o_setting_left_pane">
+                        <field name="confirmation_seller"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="confirmation_seller"/>
+                        <div class="text-muted">
+                            Mostrar mensaje de autorización para que el vendedor pueda confirmar el pedido.
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_stock_form" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='warning_info']" position="after">
+                <div class="col-12 col-lg-6 o_setting_box" id="div_inventory_approve">
+                    <div class="o_setting_left_pane">
+                        <field name="inventory_approve"/>
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="inventory_approve" string="Aprobación"/>
+                        <div class="text-muted">
+                            Añadir estado de aprobación para picking
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@name='warehouse_setting_container']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_right_pane">
+                        <label for="location_available_id" string="Ubicación para Disponibilidad"/>
+                        <div class="text-muted">
+                            Ubicación para definir la disponibilidad de un producto en reposiciones.
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field name="location_available_id" class="o_light_label" widget="selection"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

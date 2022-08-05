@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--Todo: Category Import-->
+        <record id="view_access_model_wizard" model="ir.ui.view">
+            <field name="name">access.model.wizard</field>
+            <field name="model">access.model.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Importar categoria">
+                    <sheet>
+                        <group>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2>Nota:</h2>
+                                    <div class="alert alert-info" role="alert">
+                                        Se han seleccionado "
+                                        <b>
+                                            <field name="count" readonly="1"/>
+                                        </b>
+                                        " modelos. Si desea continuar
+                                        con el proceso, click en <strong>Aceptar</strong>, de lo contrario click en <strong>
+                                        Cancelar
+                                    </strong> para no proceder.
+                                    </div>
+                                </div>
+                            </div>
+                        </group>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-9 text-left">
+                                <h5>A) ¿ Desea activar o desactivar ?</h5>
+                                <field name="action" widget="radio"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-9 text-left">
+                                <h5>A) ¿ Permiso a actualizar ?</h5>
+                                <field name="access" widget="radio"/>
+                            </div>
+                        </div>
+                    </sheet>
+                    <footer>
+                        <button name="process" string="Aceptar" title="Al aceptar continará con el proceso."
+                                icon="fa-check-circle"
+                                type="object" class="oe_highlight"/>
+                        <button string="Cancelar" class="oe_link" special="cancel" icon="fa-times-circle-o"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_access_model_wizard" model="ir.actions.act_window">
+            <field name="name">Actualizar permisos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">access.model.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

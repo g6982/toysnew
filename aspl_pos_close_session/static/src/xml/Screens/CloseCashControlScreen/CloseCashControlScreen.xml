@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="CloseCashControlScreen" owl="1">
+        <div class="ticket-screen screen">
+            <div class="screen-content" style="background: white">
+                <div class="controls">
+                    <div class="buttons">
+                        <button class="discard" t-on-click="trigger('close-closing-cash-control')">Cerrar</button>
+                    </div>
+                    <div class='cash-control-header'>
+                       Cierre de control de efectivo
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <table class="table" style="background: #edfcfb">
+                            <thead>
+                               <tr style="color: white">
+                                    <th colspan="2" class="color-odoo">Resumen por método de pago: </th>
+
+                                </tr>
+                                <tr style="color: #2abaad">
+                                    <th>Método de pago</th>
+                                    <th style="text-align: center;">Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="total_pagos" t-value="0"/>
+                                <t t-if="state.payments">
+                                    <t t-foreach="state.payments" t-as="paid">
+                                        <tr>
+                                            <td><span t-esc="paid['name']"/></td>
+                                            <td align="right" style="padding-right: 40px"><span t-esc="env.pos.format_currency(paid['total'])"/></td>
+                                        </tr>
+                                        <t t-set="total_pagos" t-value="total_pagos+paid['total']"/>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tr>
+                                        <td cospan="2">
+                                            <span><strong><h3>Sin pagos</h3></strong></span>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                            </tbody>
+                            <t t-if="total_pagos > 0">
+                                <tfoot>
+                                    <tr>
+                                        <td style="color: #3737b4">Total</td>
+                                        <td style="text-align: right;color: #3737b4;padding-right: 40px"><span t-esc="env.pos.format_currency(total_pagos)"/></td>
+                                    </tr>
+                                </tfoot>
+                            </t>
+                            <t t-else="">
+
+                            </t>
+
+                        </table>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="row" style="height: 380px;overflow: scroll;">
+                            <table class="table table-hover">
+                                <thead style="position: sticky;top: 0;">
+                                    <tr style="color: #933c74">
+                                        <th class="color-plomo" style="width: 30%">Monedas/Billetes</th>
+                                        <th class="color-plomo" style="width: 30%">Valor monetario</th>
+                                        <!--                                    <th></th>-->
+                                        <th class="color-plomo" style="text-align: right;">Subtotal</th>
+                                        <th class="color-plomo text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <t t-if="!state.showCloseStaticLines">
+                                        <t t-foreach="state.closeInputLines" t-as="line">
+                                             <CloseCashControlScreenInput line="line"/>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <div class="row">
+                             <button type="button" class="btn btn-success btn-lg" style="background:#5fe0bc; font-size: 17px"
+                                     t-on-click="createNewCloseInputLine">Nueva línea</button>
+                            &amp;nbsp;
+                            <button type="button" class="btn btn-danger btn-lg" style="background: #bd6f6f; font-size: 17px"
+                                    t-on-click="onClickCloseSession">Cerrar sesión</button>
+                        </div>
+                        <div class="row">
+<!--                            <table class="table table-responsive">-->
+<!--                            <table style="margin-left: 230px">
+&lt;!&ndash;                            <table style="margin-left: 230px">&ndash;&gt;
+                                 <tbody>
+                                   &lt;!&ndash;  <tr>
+                                         <td align="right">Saldo inicial:
+                                            <span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_start)"/></span>
+                                         </td>
+                                         <td align="right"><label>Saldo final: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_end_real)"/></span></td>
+                                         <td></td>
+                                     </tr>&ndash;&gt;
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" style="padding-right: 30px;"><label style="color:#a0a3a5">+ Transacciones Netas: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_amount_net)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td>
+                                              <t t-if="props.sessionData[0].cash_register_amount_returned > 0">
+                                                 <span class="badge badge-success">Tome en cuenta el vuelto al momento de realizar el cuadre de efectivo</span>
+                                             </t>
+                                         </td>
+                                         <td align="right" style="padding-right: 30px;"><label style="color:#a0a3a5">+ Cambio: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_amount_returned)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" style="padding-right: 30px;"><label>= Transacciones: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_total_entry_encoding)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td align="right">Saldo Final
+                                            <span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_end_real)"/></span>
+                                         </td>
+                                         <td align="right" style="padding-right: 30px;"><label>+ Saldo Inicial: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_start)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" style="padding-right: 30px;"><label><label>= Balance final: </label> </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_end)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" style="color: #3737b4;padding-right: 30px;"><label><label>Diferencia: </label> </label></td>
+                                         <td align="right" style="color: #3737b4"><span><t t-esc="env.pos.format_currency(state.closingDifference)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                 </tbody>
+                             </table>-->
+                             <table style="margin-right: 80px">
+                                 <tbody>
+<!--                                     <tr>-->
+<!--                                         <td></td>-->
+<!--                                         <td align="right" ><label style="color:#a0a3a5">+ Transacciones Netas: </label></td>-->
+<!--                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_amount_net)"/></span></td>-->
+<!--                                         <td></td>-->
+<!--                                     </tr>-->
+<!--                                     <tr>-->
+<!--                                         <td>-->
+<!--                                              <t t-if="props.sessionData[0].cash_register_amount_returned > 0">-->
+<!--                                                 <span class="badge badge-success">Tome en cuenta el vuelto al momento de realizar el cuadre de efectivo</span>-->
+<!--                                             </t>-->
+<!--                                         </td>-->
+<!--                                         <td align="right" ><label style="color:#a0a3a5">+ Cambio: </label></td>-->
+<!--                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_amount_returned)"/></span></td>-->
+<!--                                         <td></td>-->
+<!--                                     </tr>-->
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" ><label>= Transacciones: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_total_entry_encoding)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td align="right">Saldo Final
+                                            <span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_end_real)"/></span>
+                                         </td>
+                                         <td align="right" ><label>+ Saldo Inicial: </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_start)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" ><label><label>= Balance final: </label> </label></td>
+                                         <td align="right"><span><t t-esc="env.pos.format_currency(props.sessionData[0].cash_register_balance_end)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                     <tr>
+                                         <td></td>
+                                         <td align="right" style="color: #3737b4;"><label><label>Diferencia: </label> </label></td>
+                                         <td align="right" style="color: #3737b4"><span><t t-esc="env.pos.format_currency(state.closingDifference)"/></span></td>
+                                         <td></td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_pos_z_report" model="mail.template">
+            <field name="name">Z Report - Send by Email</field>
+            <field name="email_from">${(user.email or 'noreply@localhost')|safe}</field>
+            <field name="subject">POS Session ${object.name or ''}</field>
+            <field name="email_to">${(ctx.get('email_to'))}</field>
+            <field name="model_id" ref="model_pos_session"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                        <p>Hello There!</p>
+                        <p>Please find attachment for z report of session ${object.name or ''}.</p>
+                    </div>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

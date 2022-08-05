@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_order_merge,access_order_merge,order_merge.model_order_merge,,1,1,1,1
+access_purchase_order_merge,access_purchase_order_merge,order_merge.model_purchase_order_merge,,1,1,1,1

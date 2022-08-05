@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_coupons_gift_voucher_template" xml:space="preserve">
+
+	<t t-name="CouponPromotionButton" owl="1">
+		<span class="control-button pos_bag odoo-theme-color">
+			<i class="fa fa-gift"></i>
+            <span>Cupón</span>
+		</span>
+	</t>
+
+    <t t-name="CouponPromotionPopup" owl="1">
+		<div role="dialog" class="modal-dialog">
+			<div class="popup popup-confirm">
+				<t t-set="exist_coupon" t-value="props.exist_coupon" />
+				<header class="title drag-handle">
+					Introduce el código de promoción o cupón
+				</header>
+                <main class="body traceback" style="font-family: 'Lato-Reg';text-align: center;color: #875a7b;    font-size: 1.20rem;">
+					<div class="select_coupon left">
+						<div class="right_wrapper" style="max-width: 23%;float:left;margin: 0px 10px;">
+							<div class="right_img" style="opacity: 0.5;">
+								<img src="/l10n_cr_toy_extends/static/src/img/apply_coupon.png" style="max-width: 100%;"/>
+							</div>
+						</div>
+					</div>
+					<div class="select_coupon right" >
+						<div class="right_wrapper" style="max-width: 43%;float:left;margin: 0px 10px;padding-top: 20px;">
+							<input type="text" name="code_coupon" class="code_coupon_class" placeholder="Ingrese Código, ejem: cupon001" style="width: 160%;"
+								   t-att-value="props.coupon"/>
+						</div>
+					</div>
+				</main>
+                <footer class="footer">
+						<div class="button cancel odoo-theme-button" t-on-click="cancel">
+							Cerrar
+						</div>
+						<t t-if="exist_coupon == 1">
+							<div class="button remove odoo-theme-button" t-on-click="remove_coupon">
+							Remover cupón/Promoción
+						</div>
+						</t>
+						<t t-else="">
+							<div class="button confirm odoo-theme-button" t-on-click="apply_coupon">
+							Aplicar
+						</div>
+						</t>
+					</footer>
+				</div>
+		</div>
+	</t>
+
+</templates>

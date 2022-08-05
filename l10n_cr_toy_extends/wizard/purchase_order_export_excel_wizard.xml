@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--Todo: REPORT IVA-->
+        <record id="view_purchase_order_export_excel" model="ir.ui.view">
+            <field name="name">purchase.order.export.excel</field>
+            <field name="model">purchase.order.export.excel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group attrs="{'invisible': [('xls_filename','!=',False)]}">
+                            <field name="order_id" options="{'no_create': True}"/>
+                            <field name="type" widget="radio"/>
+                        </group>
+                        <group attrs="{'invisible': [('xls_filename','=',False)]}">
+                            <group style="width: 30%">
+                                <p> <i class="fa fa-file-text-o" /> El reporte está listo para ser descargado :</p>
+                            </group>
+                            <group style="width: 70%">
+                                <field name="xls_filename" invisible="1"/>
+                                <field name="xls_file" filename="xls_filename" nolabel="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="excel_report" string="Generar Excel" title="Generar excel" icon="fa-check-circle-o" type="object" class="oe_highlight"
+                                attrs="{'invisible': [('xls_filename','!=',False)]}"/>
+                        <button string="Cerrar" class="oe_link" special="cancel" icon="fa-times-circle-o"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_purchase_order_export_excel" model="ir.actions.act_window">
+            <field name="name">Exportación a Excel</field>
+            <field name="res_model">purchase.order.export.excel</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="context">{"default_order_id": active_id}</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_purchase_order_export_excel"/>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

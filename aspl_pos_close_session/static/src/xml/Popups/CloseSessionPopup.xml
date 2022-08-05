@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="CloseSessionPopup" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <Draggable>
+                <div class="popup popup-reorder-product" style="height: auto !important;max-height: 370px;max-width: 580px;">
+                    <header class="title drag-handle">
+                        Estimado usuario:
+                    </header>
+                    <main class="body">
+                       Está seguro de cerrar la sesión ?
+                    </main>
+                    <footer class="footer">
+                        <div class="button pos-close" t-on-click="closePos">
+                            Cerrar POS
+                        </div>
+                        <div class="button confirm" style="width:153px;" t-on-click="confirm">
+                            Cerras sesión POS
+                        </div>
+                        <div class="button cancel" t-on-click="cancel">
+                            Cancelar
+                        </div>
+                    </footer>
+                </div>
+            </Draggable>
+        </div>
+    </t>
+
+</templates>

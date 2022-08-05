@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_order_merge_form_new_1_inherit" model="ir.ui.view">
+        <field name="model">order.merge</field>
+        <field name="inherit_id" ref="order_merge.view_order_merge_form_new_1"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//span" position="replace"></xpath>
+            <xpath expr="//group" position="replace"></xpath>
+            <xpath expr="//separator" position="before">
+                <group>
+                    <field name="new_type" string="Tipo unión"/>
+                    <field name="new_type_lines" string="Detalle de unión"/>
+                </group>
+                <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','exist_1'),('new_type','!=','new'),('new_type_lines','!=','e')]}">
+                    <strong>Mismo cliente, lista de precios, usuario.</strong>  <br/>
+                    Se creará un nuevo pedido y se cancelarán los pedidos relacionados, además, las líneas o detalle de las órdenes, son iguales en cuanto
+                    en producto, precio y descuento.
+                </div>
+                <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','exist_1'),('new_type','!=','new'),('new_type_lines','!=','d')]}">
+                    <strong>Mismo cliente, lista de precios, usuario.</strong>  <br/>
+                    Se creará un nuevo pedido y se cancelarán los pedidos relacionados, además, las líneas o detalle de las órdenes no son
+                    estrictamente iguales, por ende, se fusionarán todas las líneas involucradas.
+                </div>
+                <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','new'),('new_type','!=','exist_1'),('new_type_lines','!=','e')]}">
+                    <strong>Mismo cliente, lista de precios, usuario.</strong>  <br/>
+                    Se usará el primer pedido como base para la unión y se cancelarán los otros pedidos relacionados, además, las líneas o detalle de las órdenes
+                    son iguales en cuanto producto, precio y descuento.
+                </div>
+                <div class="alert alert-info text-center" role="status" attrs="{'invisible': ['|','&amp;',('new_type','=','new'),('new_type','!=','exist_1'),('new_type_lines','!=','d')]}">
+                    <strong>Mismo cliente, lista de precios, usuario.</strong>  <br/>
+                    Se usará el primer pedido como base para la unión y se cancelarán los otros pedidos relacionados, además,  las líneas o detalle de las órdenes
+                    no son estrictamente iguales, por ende, se fusionarán todas las líneas involucradas.
+                </div>
+            </xpath>
+
+            <!--            <xpath expr="//field[@name='type']" position="replace">-->
+            <!--               -->
+            <!--&lt;!&ndash;                <button string="Actualizar lista de órdenes" name="re_calculate_orders" type="object" class="btn-link" icon="fa-location-arrow"/>&ndash;&gt;-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='order']" position="replace">-->
+            <!--                <field name="order" attrs="{'invisible': [('new_type', 'in', ['new'])],'required': [('new_type', 'in', ['exist_1'])]}"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='order_to_merge']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//separator" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!--            <xpath expr="//field[@name='order']" position="replace">-->
+            <!--                <field name="order" invisible="1"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='order_to_merge']" position="after">
+                <notebook>
+                    <page name="lines_so" string="Ordenes agrupadas">
+                        <field name="lines">
+                            <tree create="false">
+                                <field name="count"/>
+                                <field name="sale_order" widget="many2many_tags"/>
+                                <field name="process" widget="badge" decoration-success="process == 'to_process'" decoration-danger="process == 'no_process'"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

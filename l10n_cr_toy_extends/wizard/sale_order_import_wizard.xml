@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_import_wizard_view" model="ir.ui.view">
+        <field name="name">Importar Pedidos</field>
+        <field name="model">sale.order.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="category options">
+                <group >
+                    <group>
+                        <field name="file" attrs="{'invisible': [('logs','!=',False)]}"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="logs" attrs="{'invisible': [('logs','in',(False,'good'))]}" readonly="1"/>
+                </group>
+                <group>
+                    <div class="alert alert-info" role="alert" style="margin-bottom:0px;"
+                         attrs="{'invisible': [('logs', '!=', 'good')]}">
+                        Todo se proceso correctamente !.
+                    </div>
+                </group>
+                <footer>
+                    <button name="import_file" string="Importar" type="object" default_focus="1"
+                            class="oe_highlight"  icon="fa-forward" attrs="{'invisible': [('logs','!=',False)]}"/>
+                    <button name="link_quotations_action" string="Ver pedidos" type="object" default_focus="1"
+                            class="oe_highlight"  icon="fa-forward" attrs="{'invisible': [('logs','=',False)]}"/>
+                    <button string="Cancelar" class="btn btn-default" special="cancel" icon="fa-times"/>
+                    <div class="float-right">
+                        <b class="text-primary">Descargar formato: </b>
+                        <button name="download_file_xlx" string="Formato XLS" type="object" icon="fa-download"
+                                class="oe_highlight mr-2"/>
+
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_order_import_wizard" model="ir.actions.act_window">
+        <field name="name">Importar Pedidos</field>
+        <field name="res_model">sale.order.import.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="sale_order_import_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+
+     <menuitem id="menu_sale_order_import_wizard"
+            name="Importar pedidos"
+            action="action_sale_order_import_wizard"
+            parent="sale.sale_order_menu"
+            sequence="200" />
+
+</odoo>

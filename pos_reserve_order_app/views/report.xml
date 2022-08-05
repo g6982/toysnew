@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+            <record id="pos_order_paid_report" model="ir.actions.report">
+            <field name="name">Recibo de pago</field>
+            <field name="model">pos.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">pos_reserve_order_app.order_paid_template</field>
+            <field name="print_report_name">'recibo_pago'</field>
+        </record>
+
+<!--        <record id="pos_order_paid_receipt_report" model="ir.actions.report">-->
+<!--            <field name="name">Recibo de pago</field>-->
+<!--            <field name="model">pos.order</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">pos_reserve_order_app.pos_order_paid_receipt_template</field>-->
+<!--            <field name="print_report_name">'Recibo de pago - %s' % (object.name).replace('/', '')</field>-->
+<!--        </record>-->
+
+
+        <record id="paperformat_session_order_paid_pdf" model="report.paperformat">
+           <field name="name">Pago para orden reservada PDF</field>
+           <field name="default" eval="True" />
+           <field name="format">custom</field>
+           <field name="page_height">290</field>
+           <field name="page_width">80</field>
+           <field name="orientation">Portrait</field>
+           <field name="margin_top">1</field>
+           <field name="margin_bottom">1</field>
+           <field name="margin_left">1</field>
+           <field name="margin_right">1</field>
+           <field name="header_line" eval="False" />
+           <field name="header_spacing">0</field>
+           <field name="dpi">90</field>
+           <field name="report_ids" eval="[(6,0,[ref('pos_reserve_order_app.pos_order_paid_report')])]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order_import_wizard,access.sale.order.import.wizard,model_sale_order_import_wizard,base.group_user,1,1,1,1
+access_picking_import_wizard,access.picking.import.wizard,model_picking_import_wizard,base.group_user,1,1,1,1
+access_stock_picking_update_wizard,access.stock.picking.update.wizard,model_stock_picking_update_wizard,base.group_user,1,1,1,1
+access_container_type,container.type,model_container_type,base.group_user,1,1,1,1
+access_purchase_order_follow,purchase.order.follow,model_purchase_order_follow,base.group_user,1,1,1,1
+access_purchase_order_follow_state_in,purchase.order.follow.state.in,model_purchase_order_follow_state_in,base.group_user,1,1,1,1
+access_pos_coupon_apply_code,pos.coupon.apply.code,model_pos_coupon_apply_code,base.group_user,1,1,1,1
+access_purchase_order_export_excel,purchase.order.export.excel,model_purchase_order_export_excel,base.group_user,1,1,1,1
+access_order_merge_lines,order.merge.lines,model_order_merge_lines,base.group_user,1,1,1,1
+access_picking_merge_wizard,picking.merge.wizard,model_picking_merge_wizard,base.group_user,1,1,1,1
+access_picking_merge_lines,picking.merge.lines,model_picking_merge_lines,base.group_user,1,1,1,1
+access_message_seller_approval_wizard,message.seller.approval.wizard,model_message_seller_approval_wizard,base.group_user,1,1,1,1
+access_orderpoint_rules_import_wizard,orderpoint.rules.import.wizard,model_orderpoint_rules_import_wizard,base.group_user,1,1,1,1
+access_replacement_import_wizard,replacement.import.wizard,model_replacement_import_wizard,base.group_user,1,1,1,1
+access_internal_transfer_import_wizard,internal.transfer.import.wizard,model_internal_transfer_import_wizard,base.group_user,1,1,1,1
+access_access_model_wizard,access.model.wizard,model_access_model_wizard,base.group_user,1,1,1,1
+access_sale_order_readonly,sale.order write,model_sale_order,sale_order_edit,1,1,0,0
+access_product_tlc_line,product.tlc.line,model_product_tlc_line,base.group_user,1,1,1,1

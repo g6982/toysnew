@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="CashControlScreen" owl="1">
+        <div class="ticket-screen screen">
+            <div class="screen-content" style="background: white">
+                <div class="controls">
+                    <div class="buttons">
+                        <button class="discard"  t-on-click="clickSkip">Cerrar</button>
+                    </div>
+                    <div class='cash-control-header'>
+                        Apertura de control de efectivo
+                    </div>
+                </div>
+                <div class="row" style="height: 380px;overflow: scroll;">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead style="position: sticky;top: 0;">
+                                <tr style="color: #933c74">
+                                    <th class="color-plomo">Monedas/Billetes</th>
+                                    <th class="color-plomo">Valor monetario</th>
+                                    <th class="color-plomo"></th>
+                                    <th class="color-plomo" style="text-align: right;">Subtotal</th>
+<!--                                    <th class="color-plomo"></th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                               <t t-if="!state.showStaticLines">
+                                    <t t-foreach="state.inputLines" t-as="line">
+                                         <CashControlScreenInput line="line"/>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                 <div class="row">
+                    <div class="col-md-9">
+                        &amp;nbsp;
+                        <button type="button" t-on-click="createNewInputLine"  class="btn btn-success btn-lg" style="background:#5fe0bc; font-size: 17px">Nueva línea</button>
+                        &amp;nbsp;
+                        <button type="button" t-on-click="validateOpenBalance" class="btn btn-danger btn-lg"
+                                style="background:#1b4585; color: white; font-size: 17px">Validar efectivo</button>
+                     </div>
+                       <div class="col-md-3">
+                           <h4 class="h3_design"><strong> Total :<t t-esc="env.pos.format_currency(state.total)"/></strong></h4>
+                       </div>
+                 </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

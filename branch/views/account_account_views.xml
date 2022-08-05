@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_account_comission_bank_form" model="ir.ui.view">
+        <field name="name">account.account.comission.bank.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+
+                <div class="row" id="div_active_comission_bank">
+                    <hr/>
+                    <div class="col-12 text-center">
+                        <span style="font-size: 17px;color: #37c556"><strong></strong>Activar comisiones:
+                        </span>
+                        <field name="active_comission" widget="boolean_toggle"/>
+                    </div>
+                </div>
+                <group name="comission_bank_group">
+
+                    <group style="width: 70%">
+                        <field name="comission_bank_account"/>
+                        <field name="retention_isr_account"/>
+                        <field name="retention_iva_account"/>
+                        <field name="account_bank_id" attrs="{'required': [('active_comission','=',True)]}"/>
+
+                    </group>
+                    <group style="width: 30%">
+                        <field name="comission_bank" class="text-center"
+                               attrs="{'required': [('comission_bank_account','!=',False)]}"/>
+                        <field name="retention_isr" class="text-center"
+                               attrs="{'required': [('retention_isr_account','!=',False)]}"/>
+                        <field name="retention_iva" class="text-center"
+                               attrs="{'required': [('retention_iva_account','!=',False)]}"/>
+
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

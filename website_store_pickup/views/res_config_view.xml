@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_store_pickup_settings" model="ir.ui.view">
+            <field name="name">Website Map Settings</field>
+            <field name="model">website.store.pickup.settings</field>
+            <field name="arch" type="xml">
+                 <form string="Map Configuration" class="oe_form_configuration">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_is_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="is_active" widget="boolean_button" options='{"terminology": "active"}'/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1><field name="name"  />
+                        </h1>
+                        </div>
+                        <group >
+                            <group string="Website store Pickup" name="pick_up">
+                               <field name="customer_lead_time" widget="radio"/>
+                            </group> 
+                        </group>
+                        <group>
+                            <label for="order_premission"/>
+                            <div name="order_premission" >
+                                <div class="oe_inline">
+                                    <field name="order_premission" widget="radio"/>
+                                    <div attrs="{'invisible':[('order_premission','==','all')]}">Deny Order When Product&#032;
+                                    <field name="qty_type" class="oe_inline" style="width:33%%;"/>&#032;Quantity is Less Than&#032;
+                                    <field name="product_qty" class="oe_inline" style="width:33%%;"/>&#032;in the Warehouse of the Store.</div>
+                                </div>
+                            </div>
+                        </group>
+                    </sheet>
+                </form> 
+            </field>
+        </record>
+        <record id="view_store_pick_up_settings_tree" model="ir.ui.view">
+            <field name="name">Website Map Settings</field>
+            <field name="model">website.store.pickup.settings</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="is_active"/>
+                    <field name="order_premission"/>
+                    <field name="customer_lead_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_store_pick_up_settings" model="ir.actions.act_window">
+            <field name="name">Website Store Pick Settings</field>
+            <field name="res_model">website.store.pickup.settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_store_pickup_settings"/>
+        </record>
+
+    </data>
+</odoo>

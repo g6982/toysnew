@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_picking_type_toys_form" model="ir.ui.view">
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_reserved']" position="after">
+                <field name="active_create_invoice" attrs="{'invisible': [('code','=','internal')] }"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_form_view_toys_inherited" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_move_invoice.stock_picking_form_view_inherited"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='create_invoice']" position="replace">
+
+            </xpath>
+            <xpath expr="//button[@name='create_bill']" position="replace">
+
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_picking_backorder_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="after">
+                <field name="is_out"/>
+                <field name="active_create_invoice" invisible="1"/>
+            </xpath>
+              <xpath expr="//field[@name='origin']" position="after">
+                  <field name="carrier_id"/>
+              </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="show_picking_backorder_wizard"
+                        attrs="{'invisible': ['|', ('state', 'not in', ('assigned', 'confirmed')), ('show_validate', '=', False)]}"
+                        string="Backorder"
+                        icon="fa-location-arrow"
+                        type="object"
+                        groups="stock.group_stock_user"
+                        class="o_btn_validate btn-success"/>
+            </xpath>
+            <xpath expr="//group/group[2]" position="inside">
+                <field name="user_responsible"/>
+                <field name="operation_code" string="Tipo de transferencia"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_picking_related"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-list-ol"
+                        attrs="{'invisible': [('picking_origin_counts', '=', 0)]}">
+                    <field name="picking_origin_counts" widget="statinfo" string="Picking's relacionados"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//button[@name='action_toggle_is_locked']" position="after">
+                <button name="create_invoice" class="oe_highlight"
+                        string="Crear factura cliente" type="object"
+                        attrs="{'invisible': ['|','|','|','&amp;','|',
+                                ('invoice_count','!=', 0),
+                                ('state','!=','done'),
+                                ('operation_code','!=','outgoing'),
+                                ('is_return','=',True),
+                                ('is_out','=',False),
+                                ('active_create_invoice','=',False),
+                                ]}"/>
+
+                <button name="create_bill" class="oe_highlight"
+                        string="Create factura proveedor" type="object"
+                        attrs="{'invisible': ['|','|','|','|',
+                        ('invoice_count','!=', 0),
+                        ('state','!=','done'),
+                        ('operation_code','!=','incoming'),
+                        ('is_return','=',True),
+                        ('active_create_invoice','=',False)
+                        ]}"/>
+
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="after">
+                <button name="stock_picking_approve" attrs="{'invisible': [('state', '!=', 'to_be_approved')]}" string="Aprobar" type="object" class="oe_highlight" groups="base.group_user"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_picking_internal_toys_search" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='picking_type']" position="before">
+                <filter string="Tipo de transferencia" name="operation_code" domain="[]" context="{'group_by': 'operation_code'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_purchase_order_metro_cubico_form" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="type_container"/>
+                <field name="remaining_space"/>
+                <field name="show_alert_space_not" invisible="1"/>
+                <label for="metro_cubico" string="Total m³"/>
+                <div>
+                    <field name="metro_cubico" class="oe_inline mr-2" decoration-danger="show_alert_space_not == True "
+                           decoration-success="show_alert_space_not == False "/>
+                    <span class="badge badge-danger mb-0 oe_inline" attrs="{'invisible': [('show_alert_space_not','=', False)]}">
+                        Ha excedido el espacio del contenedor
+                    </span>
+                </div>
+                <!--                <field name="metro_cubico"/>-->
+                <field name="total_package"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                <field name="product_packaging" domain="[('product_id','=',product_id)]"
+                       groups="product.group_stock_packaging" optional="show"
+                       attrs="{'invisible': [('product_id', '=', False)]}"
+                       context="{'default_product_id': product_id, 'tree_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}"/>
+                <field name="metro_cubico" optional="show"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_qty']" position="before">
+                <field name="code_supplier" optional="show"/>
+                <field name="package_id" optional="show"/>
+                <field name="package_qty" optional="show"/>
+                <field name="package_qty_in" optional="show"/>
+                <field name="package_qty_unit" invisible="1"/>
+                <field name="price_last" optional="show"/>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Seguimiento" name="page_follow">
+                    <field name="follow_ids" widget="section_and_note_one2many">
+                        <tree editable="bottom">
+                            <field name="purchase_id" invisible="1"/>
+                            <field name="date_dispatch"/>
+                            <field name="date_proforma"/>
+                            <field name="bl"/>
+                            <field name="container"/>
+                            <field name="date_etd"/>
+                            <field name="date_eta"/>
+                            <field name="date_ata"/>
+                            <field name="location_id"/>
+                            <field name="date_in_location"/>
+                            <field name="date_now"/>
+                            <field name="days_in_location"/>
+                            <field name="move"/>
+                            <field name="state_in"/>
+                            <field name="dua"/>
+                            <field name="date_dua"/>
+                            <field name="traffic_light_color"/>
+                            <field name="date_out_of_stock"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='button_done']" position="after">
+                <button name="create_invoice_to_hacienda" string="Facturar a Hacienda" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="apply_tlc"/>
+
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="before">
+                <div>
+                    <button name="apply_yes_tlc_lines" string="TLC a todo" type="object" class="float-right ml-2"
+                            style="background: darkcyan;color: white;" icon="fa-thumbs-up"/>
+                    <button name="apply_not_tlc_lines" string="Quita TLC a todo" type="object" class="float-right"
+                            style="background:#e5c5c5;color: darkred;" icon="fa-thumbs-down"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_toys_form" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='product_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//tree/field[@name='product_id']" position="after">
+                <field name="product_template_id"
+                       string="Product"
+                       attrs="{
+                'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))],
+                'required': [('display_type', '=', False)],
+            }"
+                       options="{'no_open': True}"
+                       context="{'partner_id': parent.partner_id}"
+                       widget="matrix_configurator"/>
+                <field name="product_template_attribute_value_ids" invisible="1"/>
+                <field name="product_no_variant_attribute_value_ids" invisible="1"/>
+                <field name="is_configurable_product" invisible="1"/>
+            </xpath>
+            <field name="partner_id" position="after">
+                <field name="grid" invisible="1"/>
+                <field name="grid_product_tmpl_id" invisible="1"/>
+                <field name="grid_update" invisible="1"/>
+            </field>
+            <xpath expr="//group[@name='other_info']" position="inside">
+                <field name="report_grids" groups="base.group_no_one"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="shipping_mark"/>
+            </xpath>
+            <xpath expr="//field[@name='fiscal_position_id']" position="after">
+                <label for="lang" string="Lenguaje"/>
+                <div>
+                    <field name="lang" class="oe_inline"/>
+                    <span class="badge badge-warning mb-0 oe_inline">Traductor de PDF de "Pedido compra"</span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="purchase_order_toys_tree" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_approve']" position="before">
+                <field name="metro_cubico"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

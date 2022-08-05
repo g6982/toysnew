@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ywt_internal_stock_transfer_toys_form_view" model="ir.ui.view">
+        <field name="model">ywt.internal.stock.transfer</field>
+        <field name="inherit_id" ref="ywt_internal_stock_transfer.ywt_internal_stock_transfer_form_view"/>
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='internal_stock_transfer_line_ids']//tree//field[@name='quantity_on_hand']" position="before">
+				<field name="free_qty"/>
+			</xpath>
+
+        </field>
+    </record>
+</odoo>

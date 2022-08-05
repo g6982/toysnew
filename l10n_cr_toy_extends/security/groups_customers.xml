@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--    <record id="group_sale_salesman_all_leads_readonly" model="res.groups">-->
+<!--        <field name="name">User: Todos los documentos, orden solo lectura.</field>-->
+<!--        <field name="category_id" ref="base.module_category_sales_sales"/>-->
+<!--        <field name="implied_ids" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>-->
+<!--        <field name="comment">Todos los documentos a excepción de las órdenes que serán en modo lectura.</field>-->
+<!--    </record>-->
+
+    <record id="sale_order_edit" model="res.groups">
+        <field name="name">Edición de órdenes de venta</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

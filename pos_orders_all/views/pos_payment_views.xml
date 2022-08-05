@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_payment_inherit_form" model="ir.ui.view">
+        <field name="model">pos.payment</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <hr/>
+                <group id="refund_adds">
+                    <group>
+                        <field name="credit_client" string="Crédito a favor del cliente "/>
+                        <field name="partner_id"/>
+                    </group>
+                    <group>
+                        <field name="is_partial_used" string="Usado parcialmente"/>
+                        <field name="is_used" string="Usado totalmente"/>
+                        <field name="amount_used"/>
+                    </group>
+                    <!--					<label for="partner_id" string="Cliente"/>-->
+                    <!--					<div >-->
+                    <!--						<div class="o_row">-->
+                    <!--							<field name="partner_id" class="oe_inline"/>-->
+                    <!--							<span class="oe_inline">-->
+                    <!--								<b> Crédito a favor del cliente </b>-->
+                    <!--							</span>-->
+                    <!--							<field name="credit_client" class="oe_inline" />-->
+                    <!--						</div>-->
+                    <!--					</div>-->
+                    <!--					<label for="is_used" string="Usado?"/>-->
+                    <!--					<div >-->
+                    <!--						<div class="o_row">-->
+                    <!--							<field name="is_used" class="oe_inline"/>-->
+                    <!--							<span class="oe_inline" attrs="{'invisible': [('is_used','=',False)]}">-->
+                    <!--								<b> Se aplicó en la orden  </b>-->
+                    <!--							</span>-->
+                    <!--							<field name="order_used" class="oe_inline" attrs="{'invisible': [('is_used','=',False)]}"/>-->
+                    <!--						</div>-->
+                    <!--					</div>-->
+                </group>
+                <notebook >
+                    <page id="refund_adds_orders" string="Ordenes relacionadas">
+                        <field name="orders_used"/>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>

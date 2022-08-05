@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_metro_cubico_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="metro_cubico"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+                <field name="metro_cubico" optional="show"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="note_toys" optional="show"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                <field name="number"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                <field name="qty_available"/>
+                <field name="qty_reserved"/>
+                <field name="sale_order_reserved_now" invisible="1"/>
+                <button name="view_qty_reserved"
+                        string="Ver reservas"
+                        type="object"
+                        icon="fa-list-alt"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="before">
+                <field name="amount_invoiced"/>
+            </xpath>
+
+            <xpath expr="//field[@name='currency_id']" position="before">
+                <field name="discount_partner" class="text-center"/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_sales_related"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-list-ol"
+                        attrs="{'invisible': [('so_origin_counts', '=', 0)]}">
+                    <field name="so_origin_counts" widget="statinfo" string="Órdenes relacionadas"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="confirmation_seller" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <label for="carrier_id" string="Método de entrega"/>
+                <div>
+                    <field name="carrier_different_is" invisible="1"/>
+                    <field name="carrier_id" class="oe_inline"/>
+                    <button type='object' class="fa fa-arrow-right oe_link oe_inline" name="assign_carrier_different_partner"
+                            string="Asignar el del partner" attrs="{'invisible':[('carrier_different_is','=',False)]}"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

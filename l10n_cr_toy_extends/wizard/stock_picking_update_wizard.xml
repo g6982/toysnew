@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_update_wizard" model="ir.ui.view">
+        <field name="name">stock.picking.update.wizard</field>
+        <field name="model">stock.picking.update.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="picking_id" readonly="1" invisible="1"/>
+                    <div class="row col">
+                        <span class="badge badge-pill badge-primary ml-2">1</span> <span style="color: #5D8DA8">Seleccione y Filtre :</span>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col" style="max-width: 50%">
+                            <span style="color:#1cac70">Categorías:</span>
+                            <field name="categ_defult_ids" invisible="1"/>
+                            <field name="categ_ids" domain="[('id', 'in', categ_defult_ids)]" widget="many2many_tags"
+                                   style="width: 80%;border-radius: 5px"/>
+                            <br/>
+                            <span style="color:#1cac70">Ubicaciones:</span>
+                            <field name="location_default_ids" invisible="1"/>
+                            <field name="location_ids" domain="[('id', 'in', location_default_ids)]"/>
+                        </div>
+                        <div class="col" style="max-width: 50%">
+                            <div class="float-right">
+                                <button name="apply_filter_backorder" string="Filtrar" type="object"
+                                        class="oe_highlight" icon="fa-filter"
+                                        style="color:#3c3c99;background: #d1d1dd;border-radius: 7px"/>
+                            </div>
+                            <span style="color:#1cac70">Detalle de picking:</span>
+                            <field name="lines_ids" readonly="1"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row col">
+                        <span class="badge badge-pill badge-primary ml-2">2</span> <span style="color: #5D8DA8">Segmente :</span>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col">
+                            <span style="color:#1cac70">Desea segmentar el backorder ?</span>
+                            <field name="check_segment" widget="boolean_toggle"/>
+                        </div>
+                        <div class="col" attrs="{'invisible': [('check_segment','=',False)]}">
+                            <span style="color:#9c1cac">Separar cada</span>
+                            <field name="total_segment" style="width: 20%;border-radius: 5px;text-align:center"/>
+                            <span style="color:#9c1cac">registros.</span>
+                        </div>
+                        <div class="col">
+                            <span style="color:#1cac70">Cantidad de líneas en detalle de picking:</span>
+                            <strong>
+                                <field name="total_lines" readonly="1"/>
+                            </strong>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="alert alert-info text-center" role="alert"
+                                 attrs="{'invisible': [('total_segment', '=', 0)]}">
+                                Se crearán
+                                <strong>
+                                    <span>
+                                        <field name="total_lots" force_save="1" readonly="1"/>
+                                    </span>
+                                    LOTES
+                                </strong>
+                                para el procesamiento de los datos.
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row col">
+                        <span class="badge badge-pill badge-primary ml-2">3</span> <span style="color: #5D8DA8">Elija el tipo de picking :</span>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col">
+                            <span style="color:#1cac70">Para el caso de entregas parciales:</span>
+                            <br/>
+                            <field name="action_partial" widget="radio"/>
+<!--                            attrs="{'readonly': ['&amp;',('check_segment','=',True),('total_segment','>',0)]}"-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="alert alert-info text-center" role="alert"
+                                 attrs="{'invisible': [('mensaje', '=', False)]}">
+                                <strong>
+                                    <span>
+                                        <field name="mensaje" force_save="1" readonly="1"/>
+                                    </span>
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+                <footer>
+                    <span style="color:#4733b4">
+                        <span>
+                            <strong>Picking:</strong>
+                        </span>
+                        <field name="picking_name"/>
+                    </span>
+                    <div class="float-right">
+                        <button name="create_backorders" string="Crear Backorders" type="object" default_focus="1"
+                                class="oe_highlight" icon="fa-forward"
+                                attrs="{'invisible': [('mensaje', '!=', False)]}"/>
+                        <button string="Cancelar" class="btn btn-default" special="cancel" icon="fa-times"
+                                confirm="Desea cerrar el proceso de Backorder ?"/>
+                    </div>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_picking_update_wizard" model="ir.actions.act_window">
+        <field name="name">stock.picking.update.wizard</field>
+        <field name="res_model">stock.picking.update.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_picking_update_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

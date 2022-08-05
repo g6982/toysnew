@@ -1,0 +1,11 @@
+<odoo>
+ <record id="view_account_journal_form_expense_inherited" model="ir.ui.view">
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='suspense_account_id']" position="after">
+                   <field name="account_expense_id"/>
+                </xpath>
+            </field>
+        </record>
+</odoo>

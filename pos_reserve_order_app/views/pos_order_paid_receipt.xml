@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pos_order_paid_receipt_template">
+            <div class="pos-receipt">
+                <table style="width:100%;">
+                    <thead>
+                       <center>Z Report</center>
+                    </thead>
+
+                    <tbody>
+                        <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td>Hola</td>
+                                <td>Jhonny</td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>
+
+

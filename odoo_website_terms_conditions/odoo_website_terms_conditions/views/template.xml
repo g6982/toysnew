@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<!-- Add Terms & Conditions on Payment Page -->
+		<template id="website_sale.payment_sale_note" inherit_id="website_sale.payment" name="Accept Terms &amp; Conditions" customize_show="True" active="True">
+			<!-- Modal Popup Xpath -->
+			<xpath expr="//div[@id='payment_method']" position="before">	
+				<div t-if="website_sale_order and website_sale_order.website_order_line" class="">
+					<t t-set="website_terms_condition" t-value="website.get_website_terms_conditions()"/>
+					<t t-foreach="website_terms_condition" t-as="terms">
+						<div class="terms-conditions">	
+							<div style="font-size:20px">
+								<span t-esc="terms.title"/>
+							</div>
+							<div class="checkbox mt8 oe_accept_cgv_button" style="margin-left:19px">
+								<input type="checkbox" name="terms_conditions" id="checkbox_cgv"/>
+								<label>
+									<span t-esc="terms.name"/>
+								</label>
+								<t t-if="terms.display_condition == 'model'">
+									<a class="a-submit" href="#" data-toggle="modal" data-target="#myTerms"><b> Ver términos y condiciones</b></a>
+								</t>
+								<t t-if="terms.display_condition == 'redirect'">
+									<strong><a class="" target="_BLANK" href="/shop/terms" > Ver Terminos y condiciones...</a></strong>
+								</t>
+							</div>	
+						</div>
+						<!-- Modal -->
+						<div t-if="terms.display_condition == 'model'" class="modal fade" id="myTerms" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+							    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								  <span aria-hidden="true">×</span>
+								</button>
+								<h5 class="modal-title text-center" id="termsModalLabel"><b><span t-esc="terms.title"/></b></h5>
+							  </div>
+							  <div class="modal-body">
+								<p class="descriptions" t-esc="terms.terms_conditions" style="white-space: pre-wrap;word-break: break-word;"/>
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							  </div>
+							</div>
+						  </div>
+						</div>
+
+
+						
+						</t>
+					</div>
+				</xpath>	
+							
+		</template>
+
+		
+    </data>
+</openerp>

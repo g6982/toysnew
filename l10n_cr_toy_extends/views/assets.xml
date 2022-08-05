@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_toys" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/min/swal.min.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/ProductItem.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/Pos.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/CouponPromotion.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/PosOrdersAll.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/OrderReprintReceiptToys.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/OrderReprintScreenToys.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/FinancialEntityPopupWidget.js"/>
+            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/PaymentScreen.js"/>
+<!--            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/load_init.js"/>-->
+<!--            <script type="text/javascript" src="/l10n_cr_toy_extends/static/src/js/CouponPromotionPopup.js"/>-->
+        </xpath>
+    </template>
+</odoo>

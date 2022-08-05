@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="order_paid_template">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="width:100%;font-size:13px">
+                        <t t-foreach="docs" t-as="o">
+                            <table style="width:100%;margin-top:13px;">
+                                <body>
+                                    <tr>
+                                        <td>Fecha:</td>
+                                        <td>
+                                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                                        </td>
+                                        <td style="width:10%"/>
+                                        <td style="text-right">Hora:</td>
+                                        <td style="text-right">
+                                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M:%S')"/>
+                                        </td>
+                                    </tr>
+                                </body>
+                            </table>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <table style="width:100%;margin-top:12px;">
+                                <body>
+                                    <tr>
+                                         <th style="texta-align: center">
+                                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 130px;" alt="Logo"/>
+                                        </th>
+                                    </tr>
+                                </body>
+                            </table>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <table style="width:100%;margin-top:13px;">
+                                <body>
+                                    <tr>
+                                        <th class="text-center">
+                                            <h2>RECIBO DE PAGO</h2>
+                                        </th>
+                                    </tr>
+                                </body>
+                            </table>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <table style="width:100%;margin-top:13px;">
+                                <body>
+                                    <tr>
+                                        <td>POS</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.config_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CAJA</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.session_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>MÉTODO DE PAGO</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.get_method_last_paid().payment_method_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>REF VENTA</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ORDEN</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.pos_reference"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CLIENTE</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.partner_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ATIENDE</td>
+                                        <td style="text-align:right">
+                                            <t t-esc="o.user_id.name"/>
+                                        </td>
+                                    </tr>
+                                </body>
+
+                            </table>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <table style="width:100%;margin-top:13px;">
+                                <body>
+                                    <tr>
+                                        <td>MONTO</td>
+                                        <td style="text-align:right">
+                                               <t t-esc="o.amount_total" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PAGÓ</td>
+                                        <td style="text-align:right">
+                                                <t t-esc="o.get_method_last_paid().amount" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>SALDO</td>
+                                        <td style="text-align:right">
+                                                <t t-esc="o.amount_total - o.amount_paid" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </body>
+                            </table>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <hr style="border-bottom:1px dashed black;"/>
+                            <table style="width:100%;margin-top:13px;">
+                                <tr>
+                                    <td colpsan="2">
+                                        <img t-if="o.barcode" class="barcode" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', o.barcode, 600, 150)" alt="Barcode"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

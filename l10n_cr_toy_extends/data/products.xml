@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_category_hacienda" model="product.category">
+        <field name="parent_id" ref="product.product_category_1"/>
+        <field name="name">Servicios hacienda</field>
+    </record>
+    <record id="product_product_iva_acreditable" model="product.product">
+        <field name="name">Producto IVA Acreditable</field>
+        <field name="categ_id" ref="product_category_hacienda"/>
+        <field name="standard_price">1</field>
+        <field name="list_price">1</field>
+        <field name="type">service</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="default_code">IVA-ACREDITABLE</field>
+    </record>
+
+     <record id="product_product_arancel" model="product.product">
+        <field name="name">Producto arancel</field>
+        <field name="categ_id" ref="product_category_hacienda"/>
+        <field name="standard_price">1</field>
+        <field name="list_price">1</field>
+        <field name="type">service</field>
+        <field name="uom_id" ref="uom.product_uom_unit"/>
+        <field name="uom_po_id" ref="uom.product_uom_unit"/>
+        <field name="default_code">ARANCEL</field>
+    </record>
+
+</odoo>

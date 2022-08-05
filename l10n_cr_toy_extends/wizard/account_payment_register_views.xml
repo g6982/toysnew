@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_register_bank_comission_form" model="ir.ui.view">
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='communication']" position="after">
+                <field name="comission_bank_apply" widget="boolean_toggle"/>
+                <field name="comission_amount" attrs="{'invisible': [('comission_bank_apply','=', False)],
+                'required': [('comission_bank_apply','=', True)]}"/>
+                <field name="comission_amount_real" attrs="{'invisible': [('comission_bank_apply','=', False)],
+                'required': [('comission_bank_apply','=', True)]}"/>
+                <field name="comission_expense_account_id" attrs="{'invisible': [('comission_bank_apply','=', False)],
+                'required': [('comission_bank_apply','=', True)]}"/>
+                <hr/>
+            </xpath>
+
+              <xpath expr="//field[@name='payment_date']" position="after">
+                  <field name="sale_order_ids" widget="many2many_tags"/>
+                  <field name="purchase_order_ids" widget="many2many_tags"/>
+              </xpath>
+
+        </field>
+    </record>
+</odoo>

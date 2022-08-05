@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <template id="assets_frontend_pickup" inherit_id="website.assets_frontend" name="Assets Frontend pickup">
+      <xpath expr="." position="inside">
+          <link rel='stylesheet' href='/website_store_pickup/static/src/css/website_store_pickup.css'/>
+          <script type="text/javascript" src='/website_store_pickup/static/src/js/website_store_pickup.js'></script>
+      </xpath>
+    </template>
+
+
+     <template id="order_notes_date_replace" inherit_id="website_order_notes.payment_inherit_website_order_notes">
+      <xpath expr="//div[hasclass('date-input')]" position="replace">
+        <div t-if="website.check_order_notes_setting(1)" class="form-group date-input col-md-8">
+            <label class="control-label" for="desire_date">Desire Delivery Date</label>
+            <div class="msg-box" style="display:inline-block;">Enter Your Desired Delivery Date</div>
+            <div class='form-group'>
+                <label for="birthday" class="control-label">Your Birthday</label>      
+                <input type='text' class="form-control wk_desire_date" name='desire_date' id='datetimepicker' placeholder='YYYY-MM-DD'/>
+            </div>
+
+          </div>
+      </xpath>
+    </template>
+
+
+    <template id="store_pickup_map" name="store_pickup_map">
+        <div id="store-pickup-map">
+            <span id="carrier-value" t-att-data-carrier-value="carrier_value.id if carrier_value else None"/>
+            <span id="is-shop" t-att-data-is-shop="is_shop"/>
+            <t t-if="stores">
+                <div class="col-md-12 map-header"><strong><div class="col-md-2" style="padding: 0px;">Selected Store:</div></strong>
+                    <div class="selected-store col-md-8">
+                        <t t-if="selected_store">
+                            <span id="selected-store" t-att-data-selected-store="selected_store.id"/>
+                            <t t-set="store" t-value="selected_store"/>
+                            <t t-call="website_store_pickup.pickup_store_details"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-md-12 store-map">
+                    <t t-call="website_store_locator.store_locator_view"/>
+                </div>
+            </t>
+        </div>
+    </template>
+
+    <template id="store_pickup_payment" inherit_id="website_sale.payment">
+      <xpath expr="//div[@id='payment_method']" position="before">
+          <t t-call="website_store_pickup.store_pickup_map"/>
+          <script t-if="not stores" type="text/javascript" t-att-src="website.get_map_api_url()"></script>
+          <div class="store_pickup_loder" style="display:none;"></div>
+      </xpath>
+    </template>
+
+    <template id="store_pickup_payment_json" name="Store Pickup Payment Json">
+        <div id="store-pickup-map">
+            <span id="carrier-value" t-att-data-carrier-value="carrier_value.sudo().id if carrier_value else None"/>
+            <span id="is-shop" t-att-data-is-shop="is_shop"/>
+            <t t-if="stores">
+                <div class="col-md-12 map-header"><strong><div class="col-md-2" style="padding: 0px;">Selected Store:</div></strong>
+                    <div class="selected-store col-md-8">
+                        <t t-if="selected_store">
+                            <span id="selected-store" t-att-data-selected-store="selected_store.id"/>
+                            <t t-set="store" t-value="selected_store"/>
+                            <t t-call="website_store_pickup.pickup_store_details"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-md-12 store-map">
+                    <t t-call="website_store_locator.store_locator_view"/>
+                </div>
+                <script type="text/javascript" src='/website_store_locator/static/src/js/website_store_locator.js'></script>
+            </t>
+        </div>
+    </template>
+
+    <template id="pickup_store_details">
+        <div class="col-sm-2 col-md-2 col-lg-2" t-if="store.store_image">
+        <img t-att-src="request.website.image_url(store, 'store_image')" class="product_detail_img" t-att-atr="store.name" style="height:100px;"/>
+            <!-- <span itemprop="image" t-field="store.store_image" t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "name"}'/> -->
+        </div>
+        <div class="store-image col-md-2" t-if="not store.store_image">
+            <img src="/website_store_locator/static/src/img/store-icon.png"/>
+        </div>
+        <div class="store-info col-md-6" style="padding: 0px;">
+            <t t-if="store.name">
+                <strong><t t-esc="store.name"/></strong><br/>
+            </t>
+            <t t-if="store.street">
+                <t t-esc="store.street"/><br/>
+            </t>
+            <t t-if="store.city">
+                <t t-esc="store.city"/>&#032;,
+            </t>
+            <t t-if="store.store_state.name">
+                <t t-esc="store.store_state.name"/>&#032;,
+            </t>
+            <t t-if="store.zipcode">
+                <t t-esc="store.zipcode"/>&#032;,
+            </t>
+            <t t-if="store.country.name">
+                <t t-esc="store.country.name"/><br/>
+            </t>
+            <t t-if="store.store_phone">
+                <t t-esc="store.store_phone"/>&#032;,
+            </t>
+            <t t-if="store.store_mob">
+                <t t-esc="store.store_mob"/><br/>
+            </t>
+            <t t-if="store.store_web">
+                <a t-att-href="store.store_web"><t t-esc="store.store_web"/></a>
+            </t>
+        </div>
+        <div class="col-md-4" style="padding: 0px"><strong>Pickup Lead Time:</strong>&#032;
+            <t t-if="max_lead_time">
+                <span id="max-lead-hours" t-att-data-max-lead-hours="max_lead_hours"/>
+                <t t-esc="max_lead_time"/>
+            </t>
+        </div>
+    </template>
+
+  </data>
+</odoo>

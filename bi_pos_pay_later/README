@@ -1,0 +1,8 @@
+
+Version 14.0.0.1 : (05-02-2021)	
+		- Solve invoice create issue of partially paid order.
+
+Version 14.0.0.2 : (10-03-2021)	
+		-  allow to enter amount 0.00 and pay whole order later on.
+
+=> 14.0.0.3 : Improved an index as per latest changes.

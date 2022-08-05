@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <data noupdate="0">
+        <!--Secuencia para los movimientos en el detalle del pago-->
+        <record id="sequence_branch_seq" model="ir.sequence">
+            <field name="name">Secuencia para cierre de caja por Rama</field>
+            <field name="code">sequence.close.branch</field>
+            <field name="prefix">BRCLS/%(range_year)s/</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="6" name="padding"/>
+            <field eval="False" name="company_id"/>
+        </record>
+
+        <record id="close_branch_journal" model="account.journal">
+            <field name="company_id" ref="base.main_company"/>
+            <field name="name">Diario de Cierre</field>
+            <field name="code">BRCLS</field>
+            <field name="type">general</field>
+            <field name="secure_sequence_id" eval="sequence_branch_seq"/>
+            <field name="show_on_dashboard" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+     <record id="ir_sequence_container" model="ir.sequence">
+        <field name="name">Secuencia</field>
+        <field name="code">sequence.container.type</field>
+        <field name="prefix">CNT-</field>
+        <field name="implementation">no_gap</field>
+        <field name="padding">6</field>
+    </record>
+</odoo>

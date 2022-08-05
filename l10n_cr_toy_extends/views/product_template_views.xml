@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--PRODUCT TEMPLATE-->
+    <record id="product_supplierinfo_tree_toys_view2" model="ir.ui.view">
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="purchase.product_supplierinfo_tree_view2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price']" position="attributes">
+                <attribute name="string">Precio FOB</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_supplierinfo_form_toys_view" model="ir.ui.view">
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='price']" position="attributes">
+                <attribute name="string">Precio FOB</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_form_toys_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='purchase_method']" position="after">
+                <field name="code_supplier"/>
+            </xpath>
+            <xpath expr="//label[@for='volume']" position="before">
+                <label for="weight_net" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="weight_net" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="weight_net"/>
+                    <span>
+                        <field name="weight_uom_name"/>
+                    </span>
+                </div>
+
+                <label for="volume_ft3" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}"/>
+                <div class="o_row" name="volume_ft3" attrs="{'invisible':[('product_variant_count', '>', 1), ('is_product_variant', '=', False)]}">
+                    <field name="volume_ft3" string="Volumen "/>
+                    <span>
+                        <field name="volume_uom_name_ft3"/>
+                    </span>
+                </div>
+            </xpath>
+            <xpath expr="//label[@for='weight']" position="attributes">
+                <attribute name="string">Peso bruto</attribute>
+            </xpath>
+            <xpath expr="//group[@name='packaging']" position="before">
+                <group name="other_info" string="Otra información">
+                    <field name="age_recomended"/>
+                    <field name="type_batery"/>
+                </group>
+            </xpath>
+            <xpath expr="//group[@name='group_lots_and_weight']" position="inside">
+                <field name="tariff_description"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Aranceles" name="arancel_page">
+                    <group string="Arancel">
+                        <group>
+                            <field name="arancel_code" string="Código"/>
+                            <field name="arancel_description" string="Descripción"/>
+                        </group>
+                        <group>
+                            <field name="arancel_rate" string="Tasa"/>
+                        </group>
+                    </group>
+                    <group name="tratado" string="Tratados">
+                        <field name="arancel_lines" colspan="2" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="tmpl_id" invisible="1"/>
+                                <field name="product_id" invisible="1"/>
+                                <field name="country_id"/>
+                                <field name="code"/>
+                                <field name="description"/>
+                                <field name="rate"/>
+                            </tree>
+                        </field>
+                        <!--                        <field name="arancel_lines"/>-->
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!--PRODUCT PRODUCT-->
+</odoo>

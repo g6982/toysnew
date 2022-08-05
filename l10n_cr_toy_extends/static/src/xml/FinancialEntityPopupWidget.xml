@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template_financial_entity" xml:space="preserve">
+
+
+    <t t-name="FinancialEntityPopupWidget" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-confirm" style="height: 220px; background: white;">
+                <header class="title" style="background: #0d2c70; color: white; padding: 10px;">
+                    <t t-esc="props.title"/>
+                </header>
+                <main class="body" style="height: 100px;  margin: 5px;">
+                    <input type="hidden" name="payment_line_cid" t-att-value="props.paymentline_cid"/>
+                    <input id="transaction_id" type="text" class='input' placeholder='Ingrese código de autorización'
+                           name="transaction_id" style="margin-top: 20px;max-width: 300px;margin-left: 10px;"  data-is-required="true"/>
+                </main>
+                <footer class="footer">
+                    <div class="button confirm" style="width:153px;" t-on-click="click_confirm">
+                        Confirmar
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        Cancelar
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t>
+
+
+</templates>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_store_pickup_global,store.pick.portal.user,model_website_store_pickup_settings,,1,0,0,0
+access_store_pickup_system,store.pick.portal.system,model_website_store_pickup_settings,base.group_system,1,1,1,1

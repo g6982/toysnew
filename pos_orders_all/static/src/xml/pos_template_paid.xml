@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_order_reservation_template" inherit_id="point_of_sale.template" xml:space="preserve">
+	<!-- ClientListScreenWidget -->
+    <t t-name="PaymentScreenInheritPaid" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('customer-button')]" position="after">
+            <div class="div-credits" style=" margin-bottom: 10px;max-width: fit-content;">
+                <div>
+                    <t t-if="paguitos.length > 0 and order_is_return == 'no_return' ">
+                        <hr style="border-top: 1px dashed #50998f"/>
+                        <div style="text-align:center; color: #0070ba">
+                            <span><strong>CRÉDITOS PENDIENTES</strong></span>
+                        </div>
+                        <hr style="border-top: 1px dashed red"/>
+                         <div>
+                             <button type="button" class="btn btn-info pull-right"  t-on-click="trigger('unselect-credit-all')" style="background-color:#1ed2a8">  <i class="fa fa-close"/>
+                                 Quitar selección a todo </button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr style="background:#875A7B; color:white">
+                                    <th>Referencia</th>
+                                    <th>Met.pago</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody id="body_payments_credit">
+                                <t t-foreach="paguitos" t-as="payment" t-key="payment.id">
+                                     <tr t-att-id="payment.id" style="cursor: pointer;"
+                                         t-on-click="trigger('click-credit', payment.id)">
+                                         <td><span t-esc="payment.pos_reference"></span></td>
+<!--                                         <td><span t-esc="payment.date_order"></span></td>-->
+                                         <td><span t-esc="payment.method_paid_name" /></td>
+                                         <td style="text-align: right">
+                                             <span t-esc="Math.abs(payment.amount)"></span>
+                                         </td>
+                                    </tr>
+                                </t>
+
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-else="">
+                        <span class="badge badge-info">No tiene créditos pendientes.</span>
+                    </t>
+                </div>
+            </div>
+		</xpath>
+	</t>
+
+    <t t-name="PaymentMethodButtonInherit" t-inherit="point_of_sale.PaymentMethodButton" t-inherit-mode="extension" owl="1">
+
+
+    </t>
+</templates>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <record id="res_partner_hacienda" model="res.partner">
+          <field name="name">Ministerio de Hacienda de Costa Rica</field>
+          <field name="street">San Jóse, Avenida 2da</field>
+          <field name="zip">18503</field>
+          <field name="country_id" ref="base.cr"/>
+          <field name="phone">+506 25394647</field>
+          <field name="email">comunicacionmh@hacienda.go.cr</field>
+          <field name="image_1920" type="base64" file="l10n_cr_toy_extends/static/src/img/hacienda_cr.jpg"/>
+      </record>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="product_custom_text" inherit_id="website_sale.product" active="True" customize_show="True" name="Terms and Conditions">
+        <xpath expr="//a[@id='add_to_cart']" position="before">
+            <t t-set="warehouse_name" t-value="product._get_warehouse_available()"/>
+            <t t-set="count" t-value="0"/>
+            <t t-if="warehouse_name">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="badge badge-success">Disponible en:</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 13px;">
+                        <t t-foreach="warehouse_name" t-as="wn">
+                            <t t-set="count" t-value="count + 1"/>
+                            <tr>
+                                <td><t t-esc="count" />. <span style="color: brown;" t-esc="wn"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </xpath>
+    </template>
+</odoo>

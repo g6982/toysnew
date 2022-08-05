@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_shop_form_inherit_pickup" model="ir.ui.view">
+            <field name="name">sale.shop</field>
+            <field name="model">sale.shop</field>
+            <field name="inherit_id" ref="website_store_locator.wk_sale_shop_form_inherit"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group[@name='address']" position="before">
+                    <group string='Stock Information' name="stock_info">
+                        <group>
+                            <field name="store_warehouse"/>
+                        </group>
+                        <group >
+                            <field name="delivery_lead_time"/>
+                            <field name="lead_time_unit"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_shop_tree_inherit_pickup" model="ir.ui.view">
+            <field name="name">sale.shop</field>
+            <field name="model">sale.shop</field>
+            <field name="inherit_id" ref="website_store_locator.wk_sale_shop_tree_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="store_warehouse"/>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="view_store_pickup_sale_order_inherit_form" model="ir.ui.view">
+            <field name="name">sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_shop.wk_shop_view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="shop_id" position="after">
+                   <field name="customer_lead_time" attrs="{'invisible':[('shop_id', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>   
+        
